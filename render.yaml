@@ -30,14 +30,6 @@ services:
         sync: false
 
   - type: web
-    name: api-news-front
-    env: docker
-    plan: free
-    dockerfilePath: ./api-news-front/Dockerfile.prod
-    dockerContext: ./api-news-front
-    autoDeploy: true
-
-  - type: web
     name: nginx
     env: docker
     plan: free
