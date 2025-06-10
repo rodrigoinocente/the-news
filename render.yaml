@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: api-news-back
+    env: docker
+    plan: free
+    dockerfilePath: ./api-news-back/Dockerfile.prod
+    dockerContext: ./api-news-back
+    autoDeploy: true
+    envVars:
+      - key: BACK_MONGODB_URI
+        sync: false
+      - key: BACK_SECRET_JWT
+        sync: false
+      - key: EMAIL_ADMIN
+        sync: false
+      - key: PASSWORD_ADMIN
+        sync: false
+
+  - type: web
+    name: api-news-interact
+    env: docker
+    plan: free
+    dockerfilePath: ./api-news-interact/Dockerfile.prod
+    dockerContext: ./api-news-interact
+    autoDeploy: true
+    envVars:
+      - key: INTERACT_MONGODB_URI
+        sync: false
+      - key: INTERACT_SECRET_JWT
+        sync: false
+
+  - type: web
+    name: api-news-front
+    env: docker
+    plan: free
+    dockerfilePath: ./api-news-front/Dockerfile.prod
+    dockerContext: ./api-news-front
+    autoDeploy: true
+
+  - type: web
+    name: nginx
+    env: docker
+    plan: free
+    dockerfilePath: ./nginx/Dockerfile.prod
+    dockerContext: ./nginx
+    autoDeploy: true
+  
