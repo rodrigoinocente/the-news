@@ -1,0 +1,60 @@
+services:
+  api-news-back:
+    container_name: api-news-back
+    build:
+      context: ./api-news-back
+      dockerfile: Dockerfile.prod
+    restart: always
+    ports:
+      - 4000
+    networks:
+    - news-network
+    
+  api-news-front:
+   container_name: api-news-front
+   build:
+      context: ./api-news-front
+      dockerfile: Dockerfile.prod
+   volumes:
+      - front-build:/var/www/html
+   networks:
+      - news-network
+   restart: always
+   depends_on:
+      - api-news-back    
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    ports:
+      - '8080:8080'
+    volumes:
+      - front-build:/var/www/html
+    networks:
+      - news-network
+    restart: always
+    depends_on:
+      - api-news-front
+      - api-news-back
+
+  api-news-interact:
+    container_name: api-news-interact
+    build:
+      context: ./api-news-interact
+      dockerfile: Dockerfile.prod
+    restart: always
+    ports:
+      - 3000
+    networks:
+      - news-network  
+    depends_on:
+      - api-news-front
+      - api-news-back
+
+volumes:
+  front-build:
+  
+networks:
+  news-network:
