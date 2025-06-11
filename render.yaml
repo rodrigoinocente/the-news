@@ -34,6 +34,6 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./nginx/Dockerfile.prod
-    dockerContext: ./nginx
+    dockerContext: .
     autoDeploy: true
   
