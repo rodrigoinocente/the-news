@@ -1,5 +1,11 @@
-# Etapa de build do front
 FROM node:20-alpine AS build
+
+ARG VITE_API_BACK_URL
+ARG VITE_API_INTERACT_URL
+
+ENV VITE_API_BACK_URL=$VITE_API_BACK_URL
+ENV VITE_API_INTERACT_URL=$VITE_API_INTERACT_URL
+
 WORKDIR /app
 COPY ./api-news-front/package*.json ./
 RUN npm install
