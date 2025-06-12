@@ -32,7 +32,7 @@ services:
         sync: false
 
   - type: web
-    name: nginx
+    name: thenews
     env: docker
     plan: free
     dockerfilePath: ./nginx/Dockerfile.prod
