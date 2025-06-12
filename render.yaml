@@ -17,6 +17,8 @@ services:
         sync: false
       - key: PORT
         sync: false
+      - key: CORS_ORIGIN
+        sync: false
 
   - type: web
     name: api-news-interact
@@ -30,6 +32,8 @@ services:
         sync: false
       - key: INTERACT_SECRET_JWT
         sync: false
+      - key: CORS_ORIGIN
+        sync: false
 
   - type: web
     name: thenews
@@ -38,4 +42,8 @@ services:
     dockerfilePath: ./nginx/Dockerfile.prod
     dockerContext: .
     autoDeploy: true
-  
+    envVars:
+      - key: VITE_API_BACK_URL
+        sync: false
+      - key: VITE_API_INTERACT_URL
+        sync: false
