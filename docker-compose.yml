@@ -1,0 +1,64 @@
+services:
+  api-news-back:
+    container_name: api-news-back
+    build:
+      context: ./api-news-back
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api-news-back:/app
+    networks:
+      - news-network
+    restart: always
+
+  api-news-front:
+    container_name: api-news-front
+    build:
+      context: ./api-news-front
+    ports:
+      - "5173:5173"
+    volumes:
+      - front-build:/var/www/html
+      - ./api-news-front:/app
+      - /app/node_modules
+    networks:
+      - news-network
+    depends_on:
+      - api-news-back
+    restart: always
+
+  nginx:
+    container_name: nginx-dev-proxy
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - front-build:/var/www/html
+    networks:
+      - news-network  
+    depends_on:
+      - api-news-front
+      - api-news-back
+
+  api-news-interact:
+    container_name: api-news-interact
+    build:
+      context: ./api-news-interact
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-news-interact:/app
+    networks:
+      - news-network
+    depends_on:
+      - api-news-front
+      - api-news-back
+    restart: always
+
+networks:
+  news-network:
+
+volumes:
+  front-build:
