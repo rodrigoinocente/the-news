@@ -1,12 +1,12 @@
 [submodule "api-news-front"]
 	path = api-news-front
-	url = https://github.com/rodrigoinocente/api-news-front
+	url = https://github.com/rodrigoinocente/api-news-front.git
 	branch = main
 [submodule "api-news-back"]
 	path = api-news-back
-	url = https://github.com/rodrigoinocente/api-news-back
+	url = https://github.com/rodrigoinocente/api-news-back.git
 	branch = main
 [submodule "api-news-interact"]
 	path = api-news-interact
-	url = https://github.com/rodrigoinocente/api-news-interact
+	url = https://github.com/rodrigoinocente/api-news-interact.git
 	branch = main
